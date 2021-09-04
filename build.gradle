@@ -1,0 +1,40 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.30'
+    id 'java'
+}
+
+group 'pro.osin.tools.games'
+version '0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenCentral()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.30'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+
+    implementation 'no.tornado:tornadofx:1.7.20'
+
+    // https://mvnrepository.com/artifact/com.1stleg/jnativehook
+    implementation 'com.1stleg:jnativehook:2.1.0'
+
+    // https://www.eclipse.org/collections/
+    implementation 'org.eclipse.collections:eclipse-collections-api:10.4.0'
+    implementation 'org.eclipse.collections:eclipse-collections:10.4.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
