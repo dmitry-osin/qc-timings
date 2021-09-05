@@ -13,7 +13,13 @@ class Bootstrapper: App(primaryView = MainView::class) {
     init {
         val logger = Logger.getLogger(GlobalScreen::class.java.getPackage().name)
         logger.level = Level.WARNING
-        logger.useParentHandlers = false;
+        logger.useParentHandlers = false
+    }
+
+
+    override fun stop() {
+        GlobalScreen.unregisterNativeHook()
+        System.exit(0)
     }
 
 }
