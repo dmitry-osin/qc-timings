@@ -3,6 +3,8 @@
 ### Description
 Kotlin/JavaFx application that allows to hook key combination associated with main QC items and compute time of next main item appear. 
 
+It means you can guess/hear/see when item has been taken and press shortcut, application will notify you when time will be close to spawn item
+
 Important: It is not cheat it is just helper app. 
 
 ### Technologies
