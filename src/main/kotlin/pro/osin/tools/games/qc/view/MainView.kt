@@ -1,24 +1,28 @@
 package pro.osin.tools.games.qc.view
 
 import javafx.geometry.Insets
+import javafx.geometry.Pos
 import org.jnativehook.GlobalScreen
 import pro.osin.tools.games.qc.controller.KeyboardController
 import pro.osin.tools.games.qc.listener.GlobalKeyListener
+import pro.osin.tools.games.qc.view.MainViewConstants.STATUS_ACTIVE
+import pro.osin.tools.games.qc.view.MainViewConstants.STATUS_IDLE
 import tornadofx.*
 
-class MainView : View("My View") {
+class MainView : View("QC Timings") {
 
     private val globalKeyListener = GlobalKeyListener()
 
     private val keyboardController: KeyboardController by inject()
 
-    private val startBtn = button(text = "listen") {
+    private val startBtn = button(text = "start") {
         vboxConstraints {
             margin = Insets(10.0, 10.0, 10.0, 10.0)
         }
         action {
             GlobalScreen.registerNativeHook()
             GlobalScreen.addNativeKeyListener(globalKeyListener)
+            statusLbl.text = STATUS_ACTIVE
 
             runAsync {
                 while (true) {
@@ -28,39 +32,59 @@ class MainView : View("My View") {
         }
     }
 
-    private val stopBtn = button(text = "stop listen") {
+    private val stopBtn = button(text = "stop") {
         vboxConstraints {
             margin = Insets(10.0, 10.0, 10.0, 10.0)
         }
         action {
-            GlobalScreen.unregisterNativeHook();
+            GlobalScreen.unregisterNativeHook()
+            statusLbl.text = STATUS_IDLE
         }
+    }
+
+    private val statusLbl = label {
+        hboxConstraints {
+            margin = Insets(10.0, 10.0, 10.0, 5.0)
+        }
+        text = STATUS_IDLE
     }
 
     override val root = borderpane {
         top {
             vbox {
                 label {
+                    vboxConstraints {
+                        margin = Insets(10.0, 10.0, 10.0, 10.0)
+                    }
                     text = "Listening to keyboard events"
+                }.style {
+                    fontSize = Dimension(16.0, Dimension.LinearUnits.px)
                 }
-                this += startBtn
-                this += stopBtn
                 hbox {
-                    label(text = "Mega shortcut")
-                    textfield {  }
+                    this += startBtn
+                    this += stopBtn
+                }.apply {
+                    this.alignment = Pos.CENTER
+                    this.spacing = 10.0
                 }
-
                 hbox {
-                    label(text = "Red Armor shortcut")
-                    textfield {  }
+                    label {
+                        hboxConstraints {
+                            margin = Insets(10.0, 5.0, 10.0, 10.0)
+                        }
+                        text = "status"
+                    }
+                    this += statusLbl
                 }
             }
         }
     }
 
+}
 
+object MainViewConstants {
 
-    init {
+    const val STATUS_IDLE = "IDLE"
+    const val STATUS_ACTIVE = "ACTIVE"
 
-    }
 }

@@ -13,7 +13,7 @@ class GlobalKeyListener : NativeKeyListener {
     private val shortcutsQueue = LinkedHashSet<Int>()
 
     private val definedKeys = setOf(
-        NativeKeyEvent.VC_X, NativeKeyEvent.VC_PAGE_UP, NativeKeyEvent.VC_PAGE_DOWN
+        NativeKeyEvent.VC_X, NativeKeyEvent.VC_F1, NativeKeyEvent.VC_F2
     )
 
     override fun nativeKeyTyped(event: NativeKeyEvent?) {
@@ -34,12 +34,12 @@ class GlobalKeyListener : NativeKeyListener {
 
         shortcutsQueue.add(currentKeyCode)
 
-        val in10sec = OffsetDateTime.now().plusSeconds(18)
-        val in5sec = OffsetDateTime.now().plusSeconds(23)
+        val in10sec = OffsetDateTime.now().plusSeconds(13)
+        val in5sec = OffsetDateTime.now().plusSeconds(20)
 
         when {
             // mega
-            shortcutsQueue.containsAll(setOf(NativeKeyEvent.VC_X, NativeKeyEvent.VC_PAGE_UP)) -> {
+            shortcutsQueue.containsAll(setOf(NativeKeyEvent.VC_X, NativeKeyEvent.VC_F1)) -> {
                 timerQueue.add(
                     Item(
                         listOf(
@@ -56,7 +56,7 @@ class GlobalKeyListener : NativeKeyListener {
                 )
                 shortcutsQueue.clear()
             }
-            shortcutsQueue.containsAll(setOf(NativeKeyEvent.VC_X, NativeKeyEvent.VC_PAGE_DOWN)) -> {
+            shortcutsQueue.containsAll(setOf(NativeKeyEvent.VC_X, NativeKeyEvent.VC_F2)) -> {
                 timerQueue.add(
                     Item(
                         listOf(

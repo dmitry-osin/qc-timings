@@ -8,7 +8,7 @@ import kotlin.concurrent.schedule
 class KeyboardController: Controller() {
 
     private val timers = ArrayList<Timer>()
-    private val audioController: AudioController by inject()
+    private val playbackService = PlaybackService()
 
     fun processTimers(queue: Queue<Item>) {
         val item = queue.poll() ?: return
@@ -17,7 +17,7 @@ class KeyboardController: Controller() {
             timers += timer
             val instant = it.time.toInstant()
             timer.schedule(Date.from(instant)) {
-                audioController.playSound(it.type)
+                playbackService.playSound(it.type)
             }
         }
     }
