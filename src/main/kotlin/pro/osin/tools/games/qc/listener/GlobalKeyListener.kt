@@ -34,8 +34,8 @@ class GlobalKeyListener : NativeKeyListener {
 
         shortcutsQueue.add(currentKeyCode)
 
-        val in10sec = OffsetDateTime.now().plusSeconds(13)
-        val in5sec = OffsetDateTime.now().plusSeconds(20)
+        val in10sec = OffsetDateTime.now().plusSeconds(12)
+        val in5sec = OffsetDateTime.now().plusSeconds(19)
 
         when {
             // mega
